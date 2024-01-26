@@ -215,11 +215,13 @@ omero_web_apps_packages:
 - omero-iviewer==0.11.3
 - idr-gallery==3.11.0
 - omero-figure==4.4.3
+- omero-web-zarr==0.2.0
 omero_web_apps_names:
 - omero_mapr
 - omero_iviewer
 - idr_gallery
 - omero_figure
+- omero_web_zarr
 
 omero_web_apps_top_links:
 - label: Studies
@@ -314,6 +316,11 @@ omero_web_apps_config_append:
 
 # set...
 omero_web_apps_config_set:
+  # remove 'Preview' plugin by 'setting' right_plugins
+  omero.web.ui.right_plugins:
+    - - "Acquisition"
+      - "webclient/data/includes/right_plugin.acquisition.js.html"
+      - "metadata_tab"
   omero.web.mapr.config:
   - menu: "gene"
     config:
@@ -476,7 +483,7 @@ omero_web_apps_config_set:
       ns:
         - "openmicroscopy.org/idr/analysis/notebook"
       label: "Analysis Notebook"
-  omero.web.viewer.view: omero_iviewer.views.index
+  omero.web.viewer.view: omero_web_zarr.views.vizarr_or_iviewer
   omero.web.gallery.favicon: "https://idr.openmicroscopy.org/about/img/logos/favicon-idr.ico"
   omero.web.gallery.top_left_logo:
     src: "https://idr.openmicroscopy.org/about/img/logos/logo-idr.svg"
